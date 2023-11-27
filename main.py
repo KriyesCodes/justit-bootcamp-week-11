@@ -1,17 +1,17 @@
 import CRUD, reports
 
-def getMainMenuText(mainMenuOptions):
-  text = "\nMAIN MENU\n"
-  for key, value in mainMenuOptions.items():
+def getMenuText(menuOptions):
+  text = "\nMENU\n"
+  for key, value in menuOptions.items():
     text = text + str(key) + ". " + value + "\n"
   return text
 
-def getMainMenuInput(mainMenuOptions):
+def getMenuInput(menuOptions):
   while True:
-      print(getMainMenuText(mainMenuOptions))
+      print(getMenuText(menuOptions))
       try:
         choice = int(input("What would you like to do? "))
-        if (choice in mainMenuOptions.keys()):
+        if (choice in menuOptions.keys()):
           return choice
         else:
           raise Exception()
@@ -32,7 +32,7 @@ def mainProgram():
 
   while programRunning:
     print("Welcome to FilmFlix!")
-    choice = getMainMenuInput(mainMenuOptions)
+    choice = getMenuInput(mainMenuOptions)
     programRunning = False
 
 
