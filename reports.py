@@ -11,3 +11,7 @@ def getFilmsOfYear(releaseYear):
 def getFilmsOfRating(rating):
   dbCur.execute("SELECT * FROM tblFilms WHERE rating = ?", (rating,))
   return dbCur.fetchall()
+
+
+if __name__ == "__main__":
+  print("reports.py run directly")

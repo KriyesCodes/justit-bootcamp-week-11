@@ -30,3 +30,7 @@ def updateFilm(filmId, fieldName, fieldValue):
 def deleteFilm(filmId):
   dbCur.execute("DELETE FROM tblFilms WHERE filmID=?", (filmId,))
   dbCon.commit()
+
+
+if __name__ == "__main__":
+  print("CRUD.py run directly")
