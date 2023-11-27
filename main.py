@@ -27,15 +27,15 @@ def getMainMenuInput():
       except:
         print("\nIncorrect input, enter the number correlating to your choice")
 
-def RunMainMenu():
-  mainMenuRunning = True
+def mainProgram():
+  programRunning = True
 
-  while mainMenuRunning:
+  while programRunning:
     print("Welcome to FilmFlix!")
     choice = getMainMenuInput()
     print(choice)
-    mainMenuRunning = False
+    programRunning = False
 
 
 if __name__ == "__main__":
-  RunMainMenu()
+  mainProgram()
