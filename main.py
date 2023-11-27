@@ -1,4 +1,4 @@
-import CRUD, reports
+import CRUD as db, reports
 
 def getMenuText(menuOptions):
   text = "\nMENU\n"
@@ -17,6 +17,33 @@ def getMenuInput(menuOptions):
           raise Exception()
       except:
         print("\nIncorrect input, enter the number correlating to your choice")
+
+def addFilmMenu():
+  addMenuOptions = {
+    1: "Add film",
+    2: "Exit"
+  }
+  print("Adding a film record")
+  while True:
+    choice = getMenuInput(addMenuOptions)
+    if (choice == 1):
+      while True:
+        try:
+          filmTitle = str(input("Enter film title: "))
+          filmReleaseYear = int(input("Enter the year this film release year: "))
+          filmRating = str("Enter age rating for this film, for example PG: ")
+          filmDuration = int("Enter the film duration in minutes: ")
+          filmGenre = str("Enter the main genre of this film: ")
+
+          db.addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre)
+          print(f"\n {filmTitle} has been added to the database")
+        except:
+          print("\nInput is not in correct format, please try again")
+          break
+    else:
+      print("Returning to main menu...\n")
+      break
+      
 
 def mainProgram():
   mainMenuOptions = {
@@ -37,4 +64,4 @@ def mainProgram():
 
 
 if __name__ == "__main__":
-  mainProgram()
+  addFilmMenu()
