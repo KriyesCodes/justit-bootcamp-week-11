@@ -7,3 +7,7 @@ def getFilmsOfGenre(genre):
 def getFilmsOfYear(releaseYear):
   dbCur.execute("SELECT * FROM tblFilms WHERE yearReleased = ?", (releaseYear,))
   return dbCur.fetchall()
+
+def getFilmsOfRating(rating):
+  dbCur.execute("SELECT * FROM tblFilms WHERE rating = ?", (rating,))
+  return dbCur.fetchall()
