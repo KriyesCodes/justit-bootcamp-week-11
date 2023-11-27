@@ -26,3 +26,7 @@ def updateFilm(filmId, fieldName, fieldValue):
   
   dbCur.execute(query, (fieldValue, filmId))
   dbCon.commit()
+
+def deleteFilm(filmId):
+  dbCur.execute("DELETE FROM tblFilms WHERE filmID=?", (filmId,))
+  dbCon.commit()
