@@ -17,7 +17,8 @@ def truncateColumnValue(columnValue, maxStringLength):
     columnValue = columnValue[0:(maxStringLength-3)]+"..."
   return columnValue
 
-# Truncates all row values in a rowData tuple to a max string length appended with "..." and returns the row
+# Truncates all row values in a rowData tuple to a max string length appended with "..."
+# Returns the row as a tuple containing the truncated values
 def truncateRowValues(rowData, maxStringLength):
   returnList = []
 
@@ -27,7 +28,7 @@ def truncateRowValues(rowData, maxStringLength):
   return tuple(returnList)
 
 # Takes a tuple containing the field names of the table, and a max string length and column width to format it to
-# returns a string formatted to look like a table heading
+# Returns a string formatted to look like a table heading
 def getFormattedTableHeader(headerRowData, maxStringLength, colWidth):
   truncatedRowData = truncateRowValues(headerRowData, maxStringLength)
 
@@ -43,7 +44,7 @@ def getFormattedTableHeader(headerRowData, maxStringLength, colWidth):
   return formattedString
 
 # Takes a tuple containing row values of the table, and a max string length and column width to format it to
-#  returns a string formatted to look like a table row
+# Returns a string formatted to look like a table row
 def getFormattedTableRow(rowData, maxStringLength, colWidth):
   truncatedRowData = truncateRowValues(rowData, maxStringLength)
 
@@ -55,17 +56,19 @@ def getFormattedTableRow(rowData, maxStringLength, colWidth):
 
   return formattedString
 
-# def getTableFormatted(filmRecordList, columnWidth):
-#   maxStringLength = columnWidth - 7
-#   filmHeadings = ("Film ID", "Title", "Year Released", "Rating", "Duration", "Genre")
-#   formattedString = getTableHeadingFormatted(filmHeadings, maxStringLength, columnWidth)
-  
-#   for i in range(len(filmRecordList)):
-#     formattedString += getTableRowFormattedFilmRecord(filmRecordList[i], maxStringLength, columnWidth)
-#     formattedString += "\n"
-#   formattedString += getHorizontalTableLine(len(filmHeadings)-1, columnWidth)
+# Takes header data tuple, a row data list of tuples and a column width
+# Returns the data as a string containing the formatted table
+def getTableFormatted(headerData, rowDataList, columnWidth):
+  maxStringLength = columnWidth - 4
 
-#   return formattedString
+  formattedString = getFormattedTableHeader(headerData, maxStringLength, columnWidth)
+  
+  for i in range(len(rowDataList)):
+    formattedString += getFormattedTableRow(rowDataList[i], maxStringLength, columnWidth)
+    formattedString += "\n"
+  formattedString += getHorizontalTableLine(len(headerData), columnWidth)
+
+  return formattedString
 
 if __name__ == "__main__":
-  print(getFormattedTableRow(("FirstName", "LastName", "Long Credit Card Number"), 10, 20))
+  print(getTableFormatted(("Film ID", "Title", "Year", "Rating", "Duration", "Genre"), db.readAll(), 20))
