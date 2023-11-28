@@ -5,12 +5,12 @@ def addFilmMenu():
     0: "Exit",
     1: "Add a film"
   }
-  print("Adding a film record")
+  menuTitle = "ADDING A FILM RECORD"
   
   while True:
-    choice = helpers.getMenuInput(subMenuOptions)
+    choice = helpers.getMenuInput(subMenuOptions, menuTitle)
     if choice == 0:
-      print("Returning to main menu...\n")
+      print("\nReturning to main menu...")
       return
     else:
       match choice:
@@ -28,19 +28,19 @@ def addFilmMenu():
             print("\nInput is not in correct format, please try again")
             print(e)
         case _:
-          print("Something has gone wrong during main menu choice selection")
+          print("Something went wrong with the choice selection")
 
 def deleteFilmMenu():
   subMenuOptions = {
     0: "Exit",
     1: "Delete a film"
   }
-  print("Deleting a film record")
+  menuTitle = "DELETING A FILM RECORD"
 
   while True:
-    choice = helpers.getMenuInput(subMenuOptions)
+    choice = helpers.getMenuInput(subMenuOptions, menuTitle)
     if choice == 0:
-      print("Returning to main menu...\n")
+      print("\nReturning to main menu...")
       return
     else:
       match choice:
@@ -54,8 +54,7 @@ def deleteFilmMenu():
             print("\nInput is not in correct format, please try again")
             print(e)
         case _:
-          print("Something has gone wrong during main menu choice selection")
-          raise Exception()
+          print("Something went wrong with the choice selection")
 
 def updateFilmMenu():
   subMenuOptions = {
@@ -73,12 +72,12 @@ def updateFilmMenu():
     4: "Duration",
     5: "Genre"
   }
-  print("Updating a film record")
+  menuTitle = "UPDATING A FILM RECORD"
 
   while True:
-    choice = helpers.getMenuInput(subMenuOptions)
+    choice = helpers.getMenuInput(subMenuOptions, menuTitle)
     if choice == 0:
-      print("Returning to main menu...\n")
+      print("\nReturning to main menu...")
       return
     else:
       try:
@@ -95,7 +94,7 @@ def updateFilmMenu():
           case 5:
             newFieldValue = str(input("Enter the updated genre: "))
           case _:
-            print("Something went wrong with the menu choice selection")
+            print("Something went wrong with the choice selection")
             raise Exception()
           
         db.updateFilm(filmId, filmFields[choice], newFieldValue)
@@ -109,19 +108,19 @@ def viewFilmsMenu():
     0: "Exit",
     1: "View all films"
   }
-  print("Viewing films")
+  menuTitle = "VIEWING FILMS"
   
   while True:
-    choice = helpers.getMenuInput(subMenuOptions)
+    choice = helpers.getMenuInput(subMenuOptions, menuTitle)
     if choice == 0:
-      print("Returning to main menu...\n")
+      print("\nReturning to main menu...")
       return
     else:
       match choice:
         case 1:
           print(formatters.getTableFormatted(db.readAll(), 20))
         case _:
-          print("Something has gone wrong during main menu choice selection")
+          print("Something went wrong with the choice selection")
 
 def mainProgram():
   mainMenuOptions = {
@@ -132,14 +131,15 @@ def mainProgram():
     4: "View films",
     5: "View film reports"
   }
+  print("\nWelcome to FilmFlix!")
+  menuTitle = "MAIN MENU"
 
-  while True:
-    print("Welcome to FilmFlix!")
-    choice = helpers.getMenuInput(mainMenuOptions)
+  while True:  
+    choice = helpers.getMenuInput(mainMenuOptions, menuTitle)
 
     match choice:
       case 0:
-        print("Thank you for using FilmFlix! Come again soon!")
+        print("\nThank you for using FilmFlix! Come again soon!\n")
         return
       case 1:
         addFilmMenu()
@@ -149,8 +149,6 @@ def mainProgram():
         updateFilmMenu()
       case 4:
         viewFilmsMenu()
-      case 5:
-        continue
       case _:
         print("Something has gone wrong during main menu choice selection")
 

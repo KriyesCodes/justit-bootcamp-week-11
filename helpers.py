@@ -1,12 +1,12 @@
-def getMenuText(menuOptions):
-  text = "\nMENU\n"
+def getMenuText(menuOptions, menuTitle="MENU"):
+  text = "\n" + menuTitle + "\n"
   for key, value in menuOptions.items():
     text = text + str(key) + ". " + value + "\n"
   return text
 
-def getMenuInput(menuOptions):
+def getMenuInput(menuOptions, menuTitle):
   while True:
-      print(getMenuText(menuOptions))
+      print(getMenuText(menuOptions, menuTitle))
       try:
         choice = int(input("What would you like to do? "))
         if (choice in menuOptions.keys()):
