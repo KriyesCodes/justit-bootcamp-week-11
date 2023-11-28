@@ -1,22 +1,4 @@
-import CRUD as db, reports
-
-def getMenuText(menuOptions):
-  text = "\nMENU\n"
-  for key, value in menuOptions.items():
-    text = text + str(key) + ". " + value + "\n"
-  return text
-
-def getMenuInput(menuOptions):
-  while True:
-      print(getMenuText(menuOptions))
-      try:
-        choice = int(input("What would you like to do? "))
-        if (choice in menuOptions.keys()):
-          return choice
-        else:
-          raise Exception()
-      except:
-        print("\nIncorrect input, enter the number correlating to your choice")
+import CRUD as db, reports, helpers
 
 def addFilmMenu():
   subMenuOptions = {
@@ -26,7 +8,7 @@ def addFilmMenu():
   print("Adding a film record")
   
   while True:
-    choice = getMenuInput(subMenuOptions)
+    choice = helpers.getMenuInput(subMenuOptions)
     match choice:
       case 0:
         print("Returning to main menu...\n")
@@ -54,7 +36,7 @@ def deleteFilmMenu():
   print("Deleting a film record")
 
   while True:
-    choice = getMenuInput(subMenuOptions)
+    choice = helpers.getMenuInput(subMenuOptions)
     match choice:
       case 0:
         print("Returning to main menu...\n")
@@ -88,7 +70,7 @@ def updateFilmMenu():
   print("Updating a film record")
 
   while True:
-    choice = getMenuInput(subMenuOptions)
+    choice = helpers.getMenuInput(subMenuOptions)
     if choice == 0:
       print("Returning to main menu...\n")
       return
@@ -128,7 +110,7 @@ def mainProgram():
 
   while True:
     print("Welcome to FilmFlix!")
-    choice = getMenuInput(mainMenuOptions)
+    choice = helpers.getMenuInput(mainMenuOptions)
 
     match choice:
       case 0:
