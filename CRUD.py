@@ -5,7 +5,7 @@ def readAll():
   return dbCur.fetchall()
 
 def readFilm(filmId):
-  dbCur.execute("SELECT * FROM tblFilms WHERE filmID = ?", (filmId))
+  dbCur.execute("SELECT * FROM tblFilms WHERE filmID = ?", (filmId,))
   return dbCur.fetchall()
 
 def addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre):
