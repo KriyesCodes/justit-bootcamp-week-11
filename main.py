@@ -146,9 +146,9 @@ def mainProgram():
       case 2:
         deleteFilmMenu()
       case 3:
-        continue
+        updateFilmMenu()
       case 4:
-        continue
+        viewFilmsMenu()
       case 5:
         continue
       case _:
