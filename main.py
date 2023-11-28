@@ -19,38 +19,63 @@ def getMenuInput(menuOptions):
         print("\nIncorrect input, enter the number correlating to your choice")
 
 def addFilmMenu():
-  addMenuOptions = {
-    1: "Add film",
-    2: "Exit"
+  subMenuOptions = {
+    0: "Exit",
+    1: "Add a film"
   }
   print("Adding a film record")
+  
   while True:
-    choice = getMenuInput(addMenuOptions)
-    if (choice == 2):
-      print("Returning to main menu...\n")
-      break
-    else:
-      try:
-        filmTitle = str(input("Enter film title: "))
-        filmReleaseYear = int(input("Enter the year this film released: "))
-        filmRating = str(input("Enter age rating for this film, for example PG: "))
-        filmDuration = int(input("Enter the film duration in minutes: "))
-        filmGenre = str(input("Enter the main genre of this film: "))
+    choice = getMenuInput(subMenuOptions)
+    match choice:
+      case 0:
+        print("Returning to main menu...\n")
+        break
+      case _:
+        try:
+          filmTitle = str(input("Enter film title: "))
+          filmReleaseYear = int(input("Enter the year this film released: "))
+          filmRating = str(input("Enter age rating for this film, for example PG: "))
+          filmDuration = int(input("Enter the film duration in minutes: "))
+          filmGenre = str(input("Enter the main genre of this film: "))
 
-        db.addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre)
-        print(f"\n{filmTitle} has been added to the database")
-      except Exception as e:
-        print("\nInput is not in correct format, please try again")
-        print(e)
-      
-      
+          db.addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre)
+          print(f"\n{filmTitle} has been added to the database")
+        except Exception as e:
+          print("\nInput is not in correct format, please try again")
+          print(e)
+
+
+def deleteFilmMenu():
+  subMenuOptions = {
+    0: "Exit",
+    1: "Delete a film"
+  }
+  print("Deleting a film record")
+
+  while True:
+    choice = getMenuInput(subMenuOptions)
+    match choice:
+      case 0:
+        print("Returning to main menu...\n")
+        break
+      case _:
+        try:
+          filmId = int(input("Enter the ID of the film to delete: "))
+
+          db.deleteFilm(filmId)
+          print(f"\nFilm with ID {filmId} has been deleted from the database")
+        except Exception as e:
+          print("\nInput is not in correct format, please try again")
+          print(e)
+
 
 def mainProgram():
   mainMenuOptions = {
   1: "Add a film",
   2: "Delete a film",
   3: "Update a film",
-  4: "Show all films",
+  4: "View films",
   5: "View film reports",
   6: "Exit"
   }
@@ -64,4 +89,4 @@ def mainProgram():
 
 
 if __name__ == "__main__":
-  addFilmMenu()
+  deleteFilmMenu()
