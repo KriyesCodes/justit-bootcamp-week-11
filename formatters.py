@@ -17,25 +17,14 @@ def truncateColumnValue(columnValue, maxStringLength):
     columnValue = columnValue[0:(maxStringLength-3)]+"..."
   return columnValue
 
-def formatColumnValues(columns, maxStringLength):
-  title = str(title)
-  year = str(year)
-  rating = str(rating)
-  duration = str(duration)
-  genre = str(genre)
+# Truncates all row values in a rowData tuple to a max string length appended with "..." and returns the row
+def truncateRowValues(rowData, maxStringLength):
+  returnList = []
 
-  if len(title) > maxStringLength:
-    title = title[0:maxStringLength]+"..."
-  if len(year) > maxStringLength:
-    year = year[0:maxStringLength]+"..."
-  if len(rating) > maxStringLength:
-    rating = rating[0:maxStringLength]+"..."
-  if len(duration) > maxStringLength:
-    duration = duration[0:maxStringLength]+"..."
-  if len(genre) > maxStringLength:
-    genre = genre[0:maxStringLength]+"..."
+  for i in range(len(rowData)):
+    returnList.append(truncateColumnValue(rowData[i], maxStringLength))
 
-  return (title, year, rating, duration, genre)
+  return tuple(returnList)
 
 # Takes a tuple containing the field names of the table, and a max string length and column width to format it to
 # returns a string formatted to look like a table heading
@@ -74,4 +63,4 @@ def getTableFormatted(filmRecordList, columnWidth):
   return formattedString
 
 if __name__ == "__main__":
-  print(truncateColumnValue("This is a test string", 10))
+  print(truncateRowValues(("Test", 10000, "This is a very long string for testing", 9999999999999999999), 10))
