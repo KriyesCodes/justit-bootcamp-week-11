@@ -4,6 +4,10 @@ def readAll():
   dbCur.execute("SELECT * FROM tblFilms")
   return dbCur.fetchall()
 
+def readFilm(filmId):
+  dbCur.execute("SELECT * FROM tblFilms WHERE filmID = ?", (filmId))
+  return dbCur.fetchall()
+
 def addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre):
   dbCur.execute("INSERT INTO tblFilms(title, yearReleased, rating, duration, genre) VALUES (?, ?, ? ,? ,?)",
               (filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre))
