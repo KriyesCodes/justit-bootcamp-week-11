@@ -69,24 +69,37 @@ def deleteFilmMenu():
           print("\nInput is not in correct format, please try again")
           print(e)
 
-
 def mainProgram():
   mainMenuOptions = {
-  1: "Add a film",
-  2: "Delete a film",
-  3: "Update a film",
-  4: "View films",
-  5: "View film reports",
-  6: "Exit"
+    0: "Exit",
+    1: "Add a film",
+    2: "Delete a film",
+    3: "Update a film",
+    4: "View films",
+    5: "View film reports"
   }
-  
-  programRunning = True
 
-  while programRunning:
+  while True:
     print("Welcome to FilmFlix!")
     choice = getMenuInput(mainMenuOptions)
-    programRunning = False
 
+    match choice:
+      case 0:
+        print("Thank you for using FilmFlix! Come again soon!")
+        return
+      case 1:
+        addFilmMenu()
+      case 2:
+        deleteFilmMenu()
+      case 3:
+        continue
+      case 4:
+        continue
+      case 5:
+        continue
+      case _:
+        print("Something has gone wrong during main menu choice selection")
 
 if __name__ == "__main__":
-  deleteFilmMenu()
+  mainProgram()
+  exit()
