@@ -60,7 +60,7 @@ def getFormattedTableRow(rowData, maxStringLength, colWidth):
 # Returns the data as a string containing the formatted table
 def getTableFormatted(headerData, rowDataList, columnWidth):
   if (len(headerData) != len(rowDataList[0])):
-    raise Exception("Header data count must match row data count")
+    raise Exception("Header data size must match row data size")
   maxStringLength = columnWidth - 4
 
   formattedString = getFormattedTableHeader(headerData, maxStringLength, columnWidth)
