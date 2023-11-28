@@ -48,10 +48,12 @@ def getTableHeadingFormatted(filmHeadings, maxStringLength, colWidth):
 
   formattedString = "";
 
-  for i in range(colWidth * len(filmHeadings)-1):
-    formattedString += "_"
+  for i in range(colWidth * (len(filmHeadings)-1) + len(filmHeadings)):
+    formattedString += "-"
   formattedString += "\n"
-  formattedString += "|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|".format(title, year, rating, duration, genre, max=colWidth)
+  formattedString += "|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|\n".format(title, year, rating, duration, genre, max=colWidth)
+  for i in range(colWidth * (len(filmHeadings)-1) + len(filmHeadings)):
+    formattedString += "-"
 
   return formattedString
 # Takes a film record tuple and a max string length and column width to format it to
@@ -65,4 +67,7 @@ def getTableRowFormattedFilmRecord(filmRecord, maxStringLength, colWidth):
   return("|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|".format(title, year, rating, duration, genre, max=colWidth))
 
 if __name__ == "__main__":
-  print(getTableRowFormattedFilmRecord(db.readFilm(16)[0]), 15, 20)
+  print(getTableHeadingFormatted(("Film ID", "Title", "Year Released", "Rating", "Duration", "Genre"), 15, 20))
+  print(getTableRowFormattedFilmRecord(db.readFilm(16)[0], 15, 20))
+  print(getTableRowFormattedFilmRecord(db.readFilm(17)[0], 15, 20))
+  print(getTableRowFormattedFilmRecord(db.readFilm(18)[0], 15, 20))
