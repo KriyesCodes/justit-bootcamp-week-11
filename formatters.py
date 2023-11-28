@@ -28,18 +28,19 @@ def truncateRowValues(rowData, maxStringLength):
 
 # Takes a tuple containing the field names of the table, and a max string length and column width to format it to
 # returns a string formatted to look like a table heading
-def getTableHeadingFormatted(filmHeadings, maxStringLength, colWidth):
-  if len(filmHeadings) != 6:
-    raise Exception("Tuple length must be 6")
-  else:
-    title, year, rating, duration, genre = formatColumnValues(filmHeadings[1], filmHeadings[2], filmHeadings[3], filmHeadings[4], filmHeadings[5], maxStringLength)
+def getFormattedTableHeader(headerRowData, maxStringLength, colWidth):
+  truncatedRowData = truncateRowValues(headerRowData, maxStringLength)
 
   formattedString = ""
-  formattedString += getHorizontalTableLine(len(filmHeadings)-1, colWidth)
-  formattedString += "|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|\n".format(title, year, rating, duration, genre, max=colWidth)
-  formattedString += getHorizontalTableLine(len(filmHeadings)-1, colWidth)
+  formattedString += getHorizontalTableLine(len(truncatedRowData), colWidth)
+
+  for i in range(len(truncatedRowData)):
+    formattedString += "|{:^{max}}".format(truncatedRowData[i], max=colWidth)
+  formattedString += "|\n"
+  formattedString += getHorizontalTableLine(len(truncatedRowData), colWidth)
 
   return formattedString
+
 # Takes a film record tuple and a max string length and column width to format it to
 #  returns a string formatted to look like a table row
 def getTableRowFormattedFilmRecord(filmRecord, maxStringLength, colWidth):
@@ -63,4 +64,4 @@ def getTableFormatted(filmRecordList, columnWidth):
   return formattedString
 
 if __name__ == "__main__":
-  print(truncateRowValues(("Test", 10000, "This is a very long string for testing", 9999999999999999999), 10))
+  print(getFormattedTableHeader(("FirstName", "LastName", 999999999, "Long Credit Card Number"), 10, 20))
