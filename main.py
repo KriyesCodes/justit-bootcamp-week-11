@@ -30,7 +30,7 @@ def addFilmMenu():
     match choice:
       case 0:
         print("Returning to main menu...\n")
-        break
+        return
       case _:
         try:
           filmTitle = str(input("Enter film title: "))
@@ -58,7 +58,7 @@ def deleteFilmMenu():
     match choice:
       case 0:
         print("Returning to main menu...\n")
-        break
+        return
       case _:
         try:
           filmId = int(input("Enter the ID of the film to delete: "))
@@ -68,6 +68,53 @@ def deleteFilmMenu():
         except Exception as e:
           print("\nInput is not in correct format, please try again")
           print(e)
+
+def updateFilmMenu():
+  subMenuOptions = {
+    0: "Exit",
+    1: "Update a film's title",
+    2: "Update a film's release year",
+    3: "Update a film's age rating",
+    4: "Update a film's duration",
+    5: "Update a film's genre"
+  }
+  filmFields = {
+    1: "Title",
+    2: "YearReleased",
+    3: "Rating",
+    4: "Duration",
+    5: "Genre"
+  }
+  print("Updating a film record")
+
+  while True:
+    choice = getMenuInput(subMenuOptions)
+    if choice == 0:
+      print("Returning to main menu...\n")
+      return
+    else:
+      try:
+        filmId = int(input("Enter the ID of the film to update: "))
+        match choice:
+          case 1:
+            newFieldValue = str(input("Enter the updated title: "))
+          case 2:
+            newFieldValue = int(input("Enter the updated yelease year: "))
+          case 3:
+            newFieldValue = str(input("Enter the updated age rating: "))
+          case 4:
+            newFieldValue = int(input("Enter the updated duration in minutes: "))
+          case 5:
+            newFieldValue = str(input("Enter the updated genre: "))
+          case _:
+            print("Something went wrong with the menu choice selection")
+            raise Exception()
+          
+        db.updateFilm(filmId, filmFields[choice], newFieldValue)
+        print(f"\nThe {filmFields[choice].lower()} of the film with ID {filmId} has been updated to {newFieldValue}")
+      except Exception as e:
+        print("\nInput is not in correct format, please try again")
+        print(e)
 
 def mainProgram():
   mainMenuOptions = {
