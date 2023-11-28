@@ -8,7 +8,16 @@ def getHorizontalTableLine(numberOfColumns, colWidth):
   formattedString += "\n"
   return formattedString
 
-def formatColumnValues(title, year, rating, duration, genre, maxStringLength):
+# Truncates a column value to a max string length appended with "..." and returns it
+def truncateColumnValue(columnValue, maxStringLength):
+  if maxStringLength <= 3:
+    raise Exception("Max string length must be greater than 3 to account for elipses")
+  columnValue = str(columnValue)
+  if (len(columnValue) > maxStringLength):
+    columnValue = columnValue[0:(maxStringLength-3)]+"..."
+  return columnValue
+
+def formatColumnValues(columns, maxStringLength):
   title = str(title)
   year = str(year)
   rating = str(rating)
@@ -65,4 +74,4 @@ def getTableFormatted(filmRecordList, columnWidth):
   return formattedString
 
 if __name__ == "__main__":
-  print(getTableFormatted(db.readAll(), 12))
+  print(truncateColumnValue("This is a test string", 10))
