@@ -1,3 +1,5 @@
+import CRUD as db
+
 def formatColumnValues(title, year, rating, duration, genre, maxStringLength):
   title = str(title)
   year = str(year)

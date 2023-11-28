@@ -1,5 +1,3 @@
-import CRUD as db
-
 def getMenuText(menuOptions):
   text = "\nMENU\n"
   for key, value in menuOptions.items():
