@@ -26,23 +26,23 @@ def addFilmMenu():
   print("Adding a film record")
   while True:
     choice = getMenuInput(addMenuOptions)
-    if (choice == 1):
-      while True:
-        try:
-          filmTitle = str(input("Enter film title: "))
-          filmReleaseYear = int(input("Enter the year this film release year: "))
-          filmRating = str("Enter age rating for this film, for example PG: ")
-          filmDuration = int("Enter the film duration in minutes: ")
-          filmGenre = str("Enter the main genre of this film: ")
-
-          db.addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre)
-          print(f"\n {filmTitle} has been added to the database")
-        except:
-          print("\nInput is not in correct format, please try again")
-          break
-    else:
+    if (choice == 2):
       print("Returning to main menu...\n")
       break
+    else:
+      try:
+        filmTitle = str(input("Enter film title: "))
+        filmReleaseYear = int(input("Enter the year this film released: "))
+        filmRating = str(input("Enter age rating for this film, for example PG: "))
+        filmDuration = int(input("Enter the film duration in minutes: "))
+        filmGenre = str(input("Enter the main genre of this film: "))
+
+        db.addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre)
+        print(f"\n{filmTitle} has been added to the database")
+      except Exception as e:
+        print("\nInput is not in correct format, please try again")
+        print(e)
+      
       
 
 def mainProgram():
