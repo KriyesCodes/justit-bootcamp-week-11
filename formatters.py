@@ -37,31 +37,35 @@ def getFormattedTableHeader(headerRowData, maxStringLength, colWidth):
   for i in range(len(truncatedRowData)):
     formattedString += "|{:^{max}}".format(truncatedRowData[i], max=colWidth)
   formattedString += "|\n"
+
   formattedString += getHorizontalTableLine(len(truncatedRowData), colWidth)
 
   return formattedString
 
-# Takes a film record tuple and a max string length and column width to format it to
+# Takes a tuple containing row values of the table, and a max string length and column width to format it to
 #  returns a string formatted to look like a table row
-def getTableRowFormattedFilmRecord(filmRecord, maxStringLength, colWidth):
-  if len(filmRecord) != 6:
-    raise Exception("Tuple length must be 6")
-  else:
-    title, year, rating, duration, genre = formatColumnValues(filmRecord[1], filmRecord[2], filmRecord[3], filmRecord[4], filmRecord[5], maxStringLength)
+def getFormattedTableRow(rowData, maxStringLength, colWidth):
+  truncatedRowData = truncateRowValues(rowData, maxStringLength)
 
-  return("|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|{:^{max}}|".format(title, year, rating, duration, genre, max=colWidth))
+  formattedString = ""
 
-def getTableFormatted(filmRecordList, columnWidth):
-  maxStringLength = columnWidth - 7
-  filmHeadings = ("Film ID", "Title", "Year Released", "Rating", "Duration", "Genre")
-  formattedString = getTableHeadingFormatted(filmHeadings, maxStringLength, columnWidth)
-  
-  for i in range(len(filmRecordList)):
-    formattedString += getTableRowFormattedFilmRecord(filmRecordList[i], maxStringLength, columnWidth)
-    formattedString += "\n"
-  formattedString += getHorizontalTableLine(len(filmHeadings)-1, columnWidth)
+  for i in range(len(truncatedRowData)):
+    formattedString += "|{:^{max}}".format(truncatedRowData[i], max=colWidth)
+  formattedString += "|"
 
   return formattedString
 
+# def getTableFormatted(filmRecordList, columnWidth):
+#   maxStringLength = columnWidth - 7
+#   filmHeadings = ("Film ID", "Title", "Year Released", "Rating", "Duration", "Genre")
+#   formattedString = getTableHeadingFormatted(filmHeadings, maxStringLength, columnWidth)
+  
+#   for i in range(len(filmRecordList)):
+#     formattedString += getTableRowFormattedFilmRecord(filmRecordList[i], maxStringLength, columnWidth)
+#     formattedString += "\n"
+#   formattedString += getHorizontalTableLine(len(filmHeadings)-1, columnWidth)
+
+#   return formattedString
+
 if __name__ == "__main__":
-  print(getFormattedTableHeader(("FirstName", "LastName", 999999999, "Long Credit Card Number"), 10, 20))
+  print(getFormattedTableRow(("FirstName", "LastName", "Long Credit Card Number"), 10, 20))
