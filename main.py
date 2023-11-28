@@ -9,23 +9,27 @@ def addFilmMenu():
   
   while True:
     choice = helpers.getMenuInput(subMenuOptions)
-    match choice:
-      case 0:
-        print("Returning to main menu...\n")
-        return
-      case _:
-        try:
-          filmTitle = str(input("Enter film title: "))
-          filmReleaseYear = int(input("Enter the year this film released: "))
-          filmRating = str(input("Enter age rating for this film, for example PG: "))
-          filmDuration = int(input("Enter the film duration in minutes: "))
-          filmGenre = str(input("Enter the main genre of this film: "))
+    if choice == 0:
+      print("Returning to main menu...\n")
+      return
+    else:
+      match choice:
+        case 1:
+          try:
+            filmTitle = str(input("Enter film title: "))
+            filmReleaseYear = int(input("Enter the year this film released: "))
+            filmRating = str(input("Enter age rating for this film, for example PG: "))
+            filmDuration = int(input("Enter the film duration in minutes: "))
+            filmGenre = str(input("Enter the main genre of this film: "))
 
-          db.addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre)
-          print(f"\n{filmTitle} has been added to the database")
-        except Exception as e:
-          print("\nInput is not in correct format, please try again")
-          print(e)
+            db.addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre)
+            print(f"\n{filmTitle} has been added to the database")
+          except Exception as e:
+            print("\nInput is not in correct format, please try again")
+            print(e)
+        case _:
+          print("Something has gone wrong during main menu choice selection")
+
 
 
 def deleteFilmMenu():
@@ -37,19 +41,23 @@ def deleteFilmMenu():
 
   while True:
     choice = helpers.getMenuInput(subMenuOptions)
-    match choice:
-      case 0:
-        print("Returning to main menu...\n")
-        return
-      case _:
-        try:
-          filmId = int(input("Enter the ID of the film to delete: "))
+    if choice == 0:
+      print("Returning to main menu...\n")
+      return
+    else:
+      match choice:
+        case 1:
+          try:
+            filmId = int(input("Enter the ID of the film to delete: "))
 
-          db.deleteFilm(filmId)
-          print(f"\nFilm with ID {filmId} has been deleted from the database")
-        except Exception as e:
-          print("\nInput is not in correct format, please try again")
-          print(e)
+            db.deleteFilm(filmId)
+            print(f"\nFilm with ID {filmId} has been deleted from the database")
+          except Exception as e:
+            print("\nInput is not in correct format, please try again")
+            print(e)
+        case _:
+          print("Something has gone wrong during main menu choice selection")
+          raise Exception()
 
 def updateFilmMenu():
   subMenuOptions = {
