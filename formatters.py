@@ -59,6 +59,8 @@ def getFormattedTableRow(rowData, maxStringLength, colWidth):
 # Takes header data tuple, a row data list of tuples and a column width
 # Returns the data as a string containing the formatted table
 def getTableFormatted(headerData, rowDataList, columnWidth):
+  if (len(headerData) != len(rowDataList[0])):
+    raise Exception("Header data count must match row data count")
   maxStringLength = columnWidth - 4
 
   formattedString = getFormattedTableHeader(headerData, maxStringLength, columnWidth)
@@ -71,4 +73,4 @@ def getTableFormatted(headerData, rowDataList, columnWidth):
   return formattedString
 
 if __name__ == "__main__":
-  print(getTableFormatted(("Film ID", "Title", "Year", "Rating", "Duration", "Genre"), db.readAll(), 20))
+  print(getTableFormatted(("Film ID", "Title", "Year", "Rating", "Duration", "Genre"), db.readAll(), 15))
