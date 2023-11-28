@@ -1,4 +1,4 @@
-import CRUD as db, reports, helpers
+import CRUD as db, reports, helpers, formatters
 
 def addFilmMenu():
   subMenuOptions = {
@@ -29,8 +29,6 @@ def addFilmMenu():
             print(e)
         case _:
           print("Something has gone wrong during main menu choice selection")
-
-
 
 def deleteFilmMenu():
   subMenuOptions = {
@@ -105,6 +103,25 @@ def updateFilmMenu():
       except Exception as e:
         print("\nInput is not in correct format, please try again")
         print(e)
+
+def viewFilmsMenu():
+  subMenuOptions = {
+    0: "Exit",
+    1: "View all films"
+  }
+  print("Viewing films")
+  
+  while True:
+    choice = helpers.getMenuInput(subMenuOptions)
+    if choice == 0:
+      print("Returning to main menu...\n")
+      return
+    else:
+      match choice:
+        case 1:
+          print(formatters.getTableFormatted(db.readAll(), 20))
+        case _:
+          print("Something has gone wrong during main menu choice selection")
 
 def mainProgram():
   mainMenuOptions = {

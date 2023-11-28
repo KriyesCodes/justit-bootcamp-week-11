@@ -63,5 +63,6 @@ def getTableFormatted(filmRecordList, columnWidth):
   formattedString += getHorizontalTableLine(len(filmHeadings)-1, columnWidth)
 
   return formattedString
+
 if __name__ == "__main__":
   print(getTableFormatted(db.readAll(), 12))
