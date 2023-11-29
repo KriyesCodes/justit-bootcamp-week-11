@@ -101,7 +101,6 @@ def updateFilmMenu():
         print(f"\nThe {filmFields[choice].lower()} of the film with ID {filmId} has been updated to {newFieldValue}")
       except Exception as e:
         print("\nInput is not in correct format, please try again")
-        print(e)
 
 def viewFilmsMenu():
   subMenuOptions = {
@@ -129,6 +128,7 @@ def viewFilmReportsMenu():
     2: "View films from a specific year",
     3: "View films with a specfic age rating"
   }
+  headerData = ("Film ID", "Title", "Year", "Rating", "Duration", "Genre")
   menuTitle = "VIEWING FILM REPORTS"
 
   while True:
@@ -140,17 +140,24 @@ def viewFilmReportsMenu():
       try:
         match choice:
           case 1:
-            print("specific genre")
+            fieldName = str(input("Enter the genre to filter by: "))
+            data = reports.getFilmsOfGenre(fieldName)
           case 2:
-            print("specifc year")
+            fieldName = int(input("Enter the year to filter by: "))
+            data = reports.getFilmsOfYear(fieldName)
           case 3:
-            print("specific age rating")
+            fieldName = str(input("Enter the age rating to filter by: "))
+            data = reports.getFilmsOfRating(fieldName)
           case _:
             print("Something went wrong with the choice selection")
             raise Exception()
+          
+        if len(data) < 1:
+          print("\nNo films were found, try a different input")
+        else:
+          print(formatters.getTableFormatted(headerData, data, 20))
       except Exception as e:
         print("\nInput is not in correct format, please try again")
-        print(e)
 
 def mainProgram():
   mainMenuOptions = {
@@ -179,6 +186,8 @@ def mainProgram():
         updateFilmMenu()
       case 4:
         viewFilmsMenu()
+      case 5:
+        viewFilmReportsMenu()
       case _:
         print("Something has gone wrong during main menu choice selection")
 
