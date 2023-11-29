@@ -135,8 +135,19 @@ def viewFilmsMenu():
           if fieldChoice in filmFields.keys():
             headerData = ("Film ID", filmFields[fieldChoice])
           else:
-            print("Something went wrong with field choice selection")
-          data = db.readAll()
+            raise Exception("Something went wrong with field choice selection")
+
+          match fieldChoice:
+            case 1:
+              data = db.readFilmSpecificField("title")
+            case 2:
+              data = db.readFilmSpecificField("yearReleased")
+            case 3:
+              data = db.readFilmSpecificField("rating")
+            case 4:
+              data = db.readFilmSpecificField("duration")
+            case 5:
+              data = db.readFilmSpecificField("genre")
         case _:
           print("Something went wrong with the choice selection")
 
