@@ -8,6 +8,25 @@ def readFilm(filmId):
   dbCur.execute("SELECT * FROM tblFilms WHERE filmID = ?", (filmId,))
   return dbCur.fetchall()
 
+def readFilmSpecificField(fieldName):
+  fieldName = fieldName.lower()
+  if (fieldName == 'title'):
+    query = "SELECT filmID, Title FROM tblFilms"
+  elif (fieldName == 'yearreleased'):
+    query = "SELECT filmID, yearReleased FROM tblFilms"
+  elif (fieldName == 'rating'):
+    query = "SELECT filmID, rating FROM tblFilms"
+  elif (fieldName == 'duration'):
+    query = "SELECT filmID, duration FROM tblFilms"
+  elif (fieldName == 'genre'):
+    query = "SELECT filmID, genre FROM tblFilms"
+  else:
+    raise Exception("Field name given does not match any in the database table")
+  
+  dbCur.execute(query)
+
+  return dbCur.fetchall()
+
 def addFilm(filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre):
   dbCur.execute("INSERT INTO tblFilms(title, yearReleased, rating, duration, genre) VALUES (?, ?, ? ,? ,?)",
               (filmTitle, filmReleaseYear, filmRating, filmDuration, filmGenre))
