@@ -105,7 +105,15 @@ def updateFilmMenu():
 def viewFilmsMenu():
   subMenuOptions = {
     0: "Exit",
-    1: "View all films"
+    1: "View all information of all films",
+    2: "View ID and specific column of all films"
+  }
+  filmFields = {
+    1: "Title",
+    2: "Year",
+    3: "Rating",
+    4: "Duration",
+    5: "Genre"
   }
   menuTitle = "VIEWING FILMS"
   
@@ -117,9 +125,25 @@ def viewFilmsMenu():
     else:
       match choice:
         case 1:
-          print(formatters.getTableFormatted(db.readAll(), 20))
+          headerData = ("Film ID", filmFields[1], filmFields[2], filmFields[3], filmFields[4], filmFields[5])
+          columnWidth = 20
+          data = db.readAll()
+        case 2:
+          fieldChoice = helpers.getMenuInput(filmFields, "FIELDS")
+          columnWidth = 40
+
+          if fieldChoice in filmFields.keys():
+            headerData = ("Film ID", filmFields[fieldChoice])
+          else:
+            print("Something went wrong with field choice selection")
+          data = db.readAll()
         case _:
           print("Something went wrong with the choice selection")
+
+      if len(data) < 1:
+        print("\nNo films were found")
+      else:
+        print(formatters.getTableFormatted(headerData, data, columnWidth))
 
 def viewFilmReportsMenu():
   subMenuOptions = {
