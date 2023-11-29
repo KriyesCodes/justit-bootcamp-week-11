@@ -122,6 +122,36 @@ def viewFilmsMenu():
         case _:
           print("Something went wrong with the choice selection")
 
+def viewFilmReportsMenu():
+  subMenuOptions = {
+    0: "Exit",
+    1: "View films of a specific genre",
+    2: "View films from a specific year",
+    3: "View films with a specfic age rating"
+  }
+  menuTitle = "VIEWING FILM REPORTS"
+
+  while True:
+    choice = helpers.getMenuInput(subMenuOptions, menuTitle)
+    if choice == 0:
+      print("\nReturning to main menu...")
+      return
+    else:
+      try:
+        match choice:
+          case 1:
+            print("specific genre")
+          case 2:
+            print("specifc year")
+          case 3:
+            print("specific age rating")
+          case _:
+            print("Something went wrong with the choice selection")
+            raise Exception()
+      except Exception as e:
+        print("\nInput is not in correct format, please try again")
+        print(e)
+
 def mainProgram():
   mainMenuOptions = {
     0: "Exit",
