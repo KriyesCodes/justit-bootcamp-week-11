@@ -4,5 +4,3 @@ import sqlite3 as sql # import sqlite3 module and assigned as alias 'sql'
 dbCon = sql.connect("filmflix.db")
 # create a cursor variable and assigned it to the cursor method to execute sql statements
 dbCur = dbCon.cursor()
-
-dbCur.execute("SELECT * FROM sqlite_master WHERE type='table';")
